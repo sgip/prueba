@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="master.html" />
+  <script>
+	var count1 = 0;
+
+ 	function appendOptionLast(num,texto)
+	{
+		var elOptNew = document.createElement('option');
+		elOptNew.text = texto;
+		elOptNew.value = texto;
+		var elSel = document.getElementById('atributos');
+
+		try {
+			elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+		}
+		catch(ex) {
+			elSel.add(elOptNew); // IE only
+		}
+	}
+  </script>
+<head>
+  <meta http-equiv="content-type"
+        content="text/html; charset=UTF-8" />
+  <title>Nuevo Tipo de Item</title>
+</head>
+
+<body>
+${sidebar_top()}
+  <div>
+  <h2>Nuevo Tipo de Ítem</h2>
+  <form method="POST" action="/crearTipoDeItem">
+    <table>
+    <tr><td>Nombre: </td><td><input type="textfield" name="nombre"/></td></tr>
+  
+    </table><br/>
+    <input type="submit" value="Guardar"/>
+
+	<input type="text" name="anadir" value="Añadir"/>
+
+    <input type="button" value="Añadir" onClick="appendOptionLast(count1++,this.form.anadir.value);"/>
+    
+    <tr><td>Atributos: </td><td>
+	  <select multiple='true' id='atributos' name="atributos">
+          </select></td></tr>
+
+  </form>
+</div>
+</body>
+</html>
